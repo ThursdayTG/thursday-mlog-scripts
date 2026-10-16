@@ -1,0 +1,52 @@
+Initialise:
+	set	numberPads	1	#; number of landing pads
+	set	numberItems	16
+	set	itemTarget	null
+
+	getlink	core	0
+	sensor	amountTarget	core	@itemCapacity
+
+
+	set		i	-1
+DetermineTargetItemLoop:
+	op		add		i	i	1
+	lookup	item	itemLookup	i
+
+
+SkipUndesiredItems:
+#;	jump	DetermineTargetItem	equal	i	0	#;	copper
+#;	jump	DetermineTargetItem	equal	i	1	#;	lead
+#;	jump	DetermineTargetItem	equal	i	2	#;	metaglass
+#;	jump	DetermineTargetItem	equal	i	3	#;	graphite
+	jump	DetermineTargetItem	equal	i	4	#;	sand
+	jump	DetermineTargetItem	equal	i	5	#;	coal
+#;	jump	DetermineTargetItem	equal	i	6	#;	titanium
+#;	jump	DetermineTargetItem	equal	i	7	#;	thorium
+	jump	DetermineTargetItem	equal	i	8	#;	scrap
+#;	jump	DetermineTargetItem	equal	i	9	#;	silicon
+#;	jump	DetermineTargetItem	equal	i	10	#;	plastanium
+	jump	DetermineTargetItem	equal	i	11	#;	phase-fabric
+	jump	DetermineTargetItem	equal	i	12	#;	surge-alloy
+	jump	DetermineTargetItem	equal	i	13	#;	spore-pod
+	jump	DetermineTargetItem	equal	i	14	#;	blast-compound
+	jump	DetermineTargetItem	equal	i	15	#;	pyratite
+
+
+DetermineTargetItemSelect:
+	sensor	amountLookup	core		itemLookup
+	select	itemTarget		lessThan	amountLookup	amountTarget	itemLookup		itemTarget
+	select	amountTarget	lessThan	amountLookup	amountTarget	amountLookup	amountTarget
+
+	jump	DetermineTargetItemLoop	lessThan	i	numberItems
+
+
+	set		i	0
+SetPadsToTarget:
+	op		add		i	i	1
+	getlink	pad		i
+	control	config	pad	itemTarget	0	0	0
+
+	jump	SetPadsToTarget	lessThanEq	i	numberPads
+
+
+	end
