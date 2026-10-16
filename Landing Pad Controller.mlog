@@ -14,22 +14,22 @@ DetermineTargetItemLoop:
 
 
 SkipUndesiredItems:
-#;	jump	DetermineTargetItem	equal	i	0	#;	copper
-#;	jump	DetermineTargetItem	equal	i	1	#;	lead
-#;	jump	DetermineTargetItem	equal	i	2	#;	metaglass
-#;	jump	DetermineTargetItem	equal	i	3	#;	graphite
-	jump	DetermineTargetItem	equal	i	4	#;	sand
-	jump	DetermineTargetItem	equal	i	5	#;	coal
-#;	jump	DetermineTargetItem	equal	i	6	#;	titanium
-#;	jump	DetermineTargetItem	equal	i	7	#;	thorium
-	jump	DetermineTargetItem	equal	i	8	#;	scrap
-#;	jump	DetermineTargetItem	equal	i	9	#;	silicon
-#;	jump	DetermineTargetItem	equal	i	10	#;	plastanium
-	jump	DetermineTargetItem	equal	i	11	#;	phase-fabric
-	jump	DetermineTargetItem	equal	i	12	#;	surge-alloy
-	jump	DetermineTargetItem	equal	i	13	#;	spore-pod
-	jump	DetermineTargetItem	equal	i	14	#;	blast-compound
-	jump	DetermineTargetItem	equal	i	15	#;	pyratite
+#;	jump	DetermineTargetItemLoop	equal	i	0	#;	copper
+#;	jump	DetermineTargetItemLoop	equal	i	1	#;	lead
+#;	jump	DetermineTargetItemLoop	equal	i	2	#;	metaglass
+#;	jump	DetermineTargetItemLoop	equal	i	3	#;	graphite
+	jump	DetermineTargetItemLoop	equal	i	4	#;	sand
+	jump	DetermineTargetItemLoop	equal	i	5	#;	coal
+#;	jump	DetermineTargetItemLoop	equal	i	6	#;	titanium
+#;	jump	DetermineTargetItemLoop	equal	i	7	#;	thorium
+	jump	DetermineTargetItemLoop	equal	i	8	#;	scrap
+#;	jump	DetermineTargetItemLoop	equal	i	9	#;	silicon
+#;	jump	DetermineTargetItemLoop	equal	i	10	#;	plastanium
+	jump	DetermineTargetItemLoop	equal	i	11	#;	phase-fabric
+	jump	DetermineTargetItemLoop	equal	i	12	#;	surge-alloy
+	jump	DetermineTargetItemLoop	equal	i	13	#;	spore-pod
+	jump	DetermineTargetItemLoop	equal	i	14	#;	blast-compound
+	jump	DetermineTargetItemLoop	equal	i	15	#;	pyratite
 
 
 DetermineTargetItemSelect:
