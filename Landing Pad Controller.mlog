@@ -1,6 +1,5 @@
 Initialise:
-	set	numberPads	1	#; number of landing pads
-	set	numberItems	16
+	set	itemIDs		16
 	set	itemTarget	null
 
 	getlink	core	0
@@ -13,25 +12,6 @@ DetermineTargetItemLoop:
 	lookup	item	itemLookup	i
 
 
-SkipUndesiredItems:
-#;	jump	DetermineTargetItemLoop	equal	i	0	#;	copper
-#;	jump	DetermineTargetItemLoop	equal	i	1	#;	lead
-#;	jump	DetermineTargetItemLoop	equal	i	2	#;	metaglass
-#;	jump	DetermineTargetItemLoop	equal	i	3	#;	graphite
-	jump	DetermineTargetItemLoop	equal	i	4	#;	sand
-	jump	DetermineTargetItemLoop	equal	i	5	#;	coal
-#;	jump	DetermineTargetItemLoop	equal	i	6	#;	titanium
-#;	jump	DetermineTargetItemLoop	equal	i	7	#;	thorium
-	jump	DetermineTargetItemLoop	equal	i	8	#;	scrap
-#;	jump	DetermineTargetItemLoop	equal	i	9	#;	silicon
-#;	jump	DetermineTargetItemLoop	equal	i	10	#;	plastanium
-	jump	DetermineTargetItemLoop	equal	i	11	#;	phase-fabric
-	jump	DetermineTargetItemLoop	equal	i	12	#;	surge-alloy
-	jump	DetermineTargetItemLoop	equal	i	13	#;	spore-pod
-	jump	DetermineTargetItemLoop	equal	i	14	#;	blast-compound
-	jump	DetermineTargetItemLoop	equal	i	15	#;	pyratite
-
-
 DetermineTargetItemSelect:
 	sensor	amountLookup	core		itemLookup
 	select	itemTarget		lessThan	amountLookup	amountTarget	itemLookup		itemTarget
@@ -41,6 +21,7 @@ DetermineTargetItemSelect:
 
 
 	set		i	0
+	op		sub	numberLandingPads	@links	1
 SetPadsToTarget:
 	op		add		i	i	1
 	getlink	pad		i
