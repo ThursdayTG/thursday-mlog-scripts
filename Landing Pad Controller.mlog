@@ -1,52 +1,57 @@
-Initialise:
+l_Initialise:
 	set	numberItems	16
 	set	itemTarget	null
 
-	getlink	core	0
-	sensor	amountTarget	core	@itemCapacity
+	getlink		core	0
+	sensor		amountCapacity	core			@itemCapacity
+	op		sub	amountTarget	amountCapacity	100
 
 
-	set		i	-1
-DetermineTargetItemLoop:
-	op		add		i	i	1
+	set		i	0
+l_DetermineItemLoopEntry:
 	lookup	item	itemLookup	i
 
 
-SkipUndesiredItems:
-#;	jump	DetermineTargetItemLoop	equal	i	0	#;	copper
-#;	jump	DetermineTargetItemLoop	equal	i	1	#;	lead
-#;	jump	DetermineTargetItemLoop	equal	i	2	#;	metaglass
-#;	jump	DetermineTargetItemLoop	equal	i	3	#;	graphite
-	jump	DetermineTargetItemLoop	equal	i	4	#;	sand
-	jump	DetermineTargetItemLoop	equal	i	5	#;	coal
-#;	jump	DetermineTargetItemLoop	equal	i	6	#;	titanium
-#;	jump	DetermineTargetItemLoop	equal	i	7	#;	thorium
-	jump	DetermineTargetItemLoop	equal	i	8	#;	scrap
-#;	jump	DetermineTargetItemLoop	equal	i	9	#;	silicon
-#;	jump	DetermineTargetItemLoop	equal	i	10	#;	plastanium
-	jump	DetermineTargetItemLoop	equal	i	11	#;	phase-fabric
-	jump	DetermineTargetItemLoop	equal	i	12	#;	surge-alloy
-	jump	DetermineTargetItemLoop	equal	i	13	#;	spore-pod
-	jump	DetermineTargetItemLoop	equal	i	14	#;	blast-compound
-	jump	DetermineTargetItemLoop	equal	i	15	#;	pyratite
+l_SkipUndesiredItems:
+#;	jump	l_DetermineItemLoopExit	equal	i	0	#;	copper
+#;	jump	l_DetermineItemLoopExit	equal	i	1	#;	lead
+#;	jump	l_DetermineItemLoopExit	equal	i	2	#;	metaglass
+#;	jump	l_DetermineItemLoopExit	equal	i	3	#;	graphite
+	jump	l_DetermineItemLoopExit	equal	i	4	#;	sand
+	jump	l_DetermineItemLoopExit	equal	i	5	#;	coal
+#;	jump	l_DetermineItemLoopExit	equal	i	6	#;	titanium
+#;	jump	l_DetermineItemLoopExit	equal	i	7	#;	thorium
+	jump	l_DetermineItemLoopExit	equal	i	8	#;	scrap
+#;	jump	l_DetermineItemLoopExit	equal	i	9	#;	silicon
+#;	jump	l_DetermineItemLoopExit	equal	i	10	#;	plastanium
+	jump	l_DetermineItemLoopExit	equal	i	11	#;	phase-fabric
+	jump	l_DetermineItemLoopExit	equal	i	12	#;	surge-alloy
+	jump	l_DetermineItemLoopExit	equal	i	13	#;	spore-pod
+	jump	l_DetermineItemLoopExit	equal	i	14	#;	blast-compound
+	jump	l_DetermineItemLoopExit	equal	i	15	#;	pyratite
 
 
-DetermineTargetItemSelect:
+l_DetermineItemLoopCalculate:
 	sensor	amountLookup	core		itemLookup
 	select	itemTarget		lessThan	amountLookup	amountTarget	itemLookup		itemTarget
 	select	amountTarget	lessThan	amountLookup	amountTarget	amountLookup	amountTarget
 
-	jump	DetermineTargetItemLoop	lessThan	i	numberItems
 
-
-	set		i	0
-	op		sub		numberPads	@links	1
-SetPadsToTarget:
+l_DetermineItemLoopExit:
 	op		add		i	i	1
+	jump	l_DetermineItemLoopEntry	lessThan	i	numberItems
+
+
+	set		i	1
+	set		amountPads	@links
+	#; this makes amountPads 1 larger than the actual number of pads,
+	#; but `jump lessThan amountPads` prevents an off by one error
+l_SetPadsToItem:
 	getlink	pad		i
 	control	config	pad	itemTarget	0	0	0
 
-	jump	SetPadsToTarget	lessThanEq	i	numberPads
+	op		add		i	i	1
+	jump	l_SetPadsToItem	lessThan	i	amountPads
 
 
 	end
